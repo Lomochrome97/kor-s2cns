@@ -315,7 +315,7 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+     document.addEventListener('DOMContentLoaded', function () {
       const startBtn = document.querySelector('.start-btn');
       const backBtn = document.querySelector('.back-btn');
       const prevBtn = document.querySelector('.prev');
@@ -327,7 +327,62 @@
       startBtn.addEventListener("click", goToStimulus);
       backBtn.addEventListener("click", goToScenario);
       prevBtn.addEventListener("click", prevImage);
-      nextBtn.addEventListener("click"안 ' + booked + '회 예약되었습니다.';
+      nextBtn.addEventListener("click", nextImage);
+
+      function goToStimulus() {
+        scenarioPage.classList.remove("active");
+        stimulusPage.classList.add("active");
+        updateRoomCount(0);
+      }
+
+      function goToScenario() {
+        stimulusPage.classList.remove("active");
+        scenarioPage.classList.add("active");
+      }
+
+      const imagePaths = [
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/321354367.jpg?k=7bbf3d7c0bb58231937a35bcdb8b7e0e2dba3179583b7e85437d72e4b3343164&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/321354257.jpg?k=419027b1b400a15ba95115915abc593580efa352350ed789ce97725faf767f80&o=&hp=1",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/612283721.jpg?k=fa209a270765f2018ea932251b905198d62b5e9d07cadfb466b8fdc0a0a8a354&o=&hp=1"
+      ];
+
+      let currentImageIndex = 0;
+      const sliderImage = document.querySelector('.slider-image');
+
+      function showImage(index) {
+        sliderImage.src = imagePaths[index];
+      }
+
+      function prevImage() {
+        currentImageIndex = (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+        showImage(currentImageIndex);
+      }
+
+      function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+        showImage(currentImageIndex);
+      }
+
+      showImage(currentImageIndex);
+
+      const TOTAL_ROOMS = 36;
+      const roomsLeftElem = document.querySelector('.rooms-left');
+      const purchasesElem = document.querySelector('.purchases');
+      const roomStates = [4, 3, 2];
+      const timeDelays = [4000, 5000];
+
+      function updateRoomCount(index) {
+         if (index >= roomStates.length) return;
+
+        const roomsLeft = roomStates[index];
+        const booked = TOTAL_ROOMS - roomsLeft;
+        const oldCount = parseInt(roomsLeftElem.textContent.match(/\d+/)[0]);
+        const alertElem = document.querySelector('.booking-alert');
+
+        if (roomsLeft !== oldCount) {
+            // 텍스트 갱신
+            roomsLeftElem.textContent = '남은 객실 수: ' + roomsLeft;
+            purchasesElem.textContent = '24시간 동안 ' + booked + '회 예약되었습니다.';
 
             // 메시지 표시
             alertElem.style.display = 'inline-block';
