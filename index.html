@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study2 Consistent</title>
   <style>
 
     .page { display: none; }
@@ -259,25 +258,23 @@
 <body>
 
   <div id="scenario-page" class="page active">
-    <h2 style="color:#003580;">Scenario</h2>
+    <h2 style="color:#003580;">시나리오</h2>
     <p style="font-size: 18px;">
-      Imagine you are planning a 5-day vacation to Bangkok, Thailand in September.<br>
-      While browsing various booking websites, you come across a hotel that seems to match your budget and preferences.
+      당신은 현재 태국 방콕으로의 여행을 계획하고 있습니다.<br>
+      호텔 예약 사이트를 통해 적당한 숙소를 알아보던 중 당신의 취향에 맞고 예산에도 적합한 호텔을 찾았습니다.
       </p>
       <p style="font-size: 18px;">
-      As you review the page, you see that <strong><u> only a limited number of rooms are left</u></strong>, and <strong><u> the hotel has been booked multiple times.<br>
-      These numbers update in real time as you continue to view the page.<br></u></strong>
-      </p>
-      <p style="font-size: 18px;">
-      You begin to consider whether to make a reservation now.
+      보다 자세한 정보를 확인하여 이 호텔을 예약할지 고려하고 있으나,<br><strong><u> 호텔에는 한정된 수의 객실만 남아 있고 그 수는 실시간으로 변하고 있습니다.</u></strong>
+        <br>
+        <strong><u> 또한, 이미 여러 차례 예약된 바가 있고 이 숫자 또한 실시간으로 변하고 있습니다.<br></u></strong>
       </p>
     <br>
-    <button class="start-btn">Next</button>
+    <button class="start-btn">다음</button>
   </div>
 
   <div id="stimulus-page" class="page">
-    <button class="back-btn">← Back</button>
-    <h2 style="color:#003580; text-align: center;">Book Your Room!</h2>
+    <button class="back-btn">← 뒤로</button>
+    <h2 style="color:#003580; text-align: center;">지금 바로 예약하세요!</h2>
 
     <div class="container">
       <div class="hotel">
@@ -290,27 +287,27 @@
         </div>
 
         <div class="info-center">
-          <div class="hotel-name">The Bangkok Hotel Sukhumvit</div>
-          <div class="location">Wattana, Bangkok</div>
-          <div class="distance">2 km from city center</div>
-          <div class="room-type">Deluxe King Room</div>
-          <div class="amenities">Amenities: Free Wi-Fi, Pool, Spa, Fitness center</div>
+          <div class="hotel-name">더 방콕 호텔 수쿰빗</div>
+          <div class="location">와타나, 방콕</div>
+          <div class="distance">도심으로부터 약 2km 거리</div>
+          <div class="room-type">디럭스 킹 룸</div>
+          <div class="amenities">어메니티: 무료 와이파이, 수영장, 스파, 피트니스 센터</div>
           <div style="display: flex; align-items: center; gap: 10px;">
-            <div class="scarcity rooms-left">Rooms Left: 4</div>
-            <div class="booking-alert" style="display:none;">Somebody Just Booked!</div>
+            <div class="scarcity rooms-left">남은 객실 수: 4</div>
+            <div class="booking-alert" style="display:none;">누군가가 예약했습니다!</div>
           </div>
-          <div class="booked purchases">Booked 32 times since yesterday</div>
+          <div class="booked purchases">24시간 동안 32회 예약되었습니다.</div>
         </div>
 
         <div class="info-right">
           <div class="rating-box">
-            <span class="rating">⭐ 9.4 - Excellent</span>
-            <span class="reviews">(212 reviews)</span>
+            <span class="rating">⭐ 9.4 - 매우 우수</span>
+            <span class="reviews">(리뷰 212 개)</span>
           </div>
           <div class="price-box">
-            <div class="check-dates">Check-in: Sep 5<br>Check-out: Sep 9</div>
-            <div class="price">$380 / night</div>
-            <button class="reserve-btn">Book</button>
+            <div class="check-dates">체크인: 9월 5일<br>체크아웃: 9월 9일</div>
+            <div class="price">277,000원 / 1박</div>
+            <button class="reserve-btn">예약하기</button>
           </div>
         </div>
       </div>
@@ -330,62 +327,7 @@
       startBtn.addEventListener("click", goToStimulus);
       backBtn.addEventListener("click", goToScenario);
       prevBtn.addEventListener("click", prevImage);
-      nextBtn.addEventListener("click", nextImage);
-
-      function goToStimulus() {
-        scenarioPage.classList.remove("active");
-        stimulusPage.classList.add("active");
-        updateRoomCount(0);
-      }
-
-      function goToScenario() {
-        stimulusPage.classList.remove("active");
-        scenarioPage.classList.add("active");
-      }
-
-      const imagePaths = [
-        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/321354367.jpg?k=7bbf3d7c0bb58231937a35bcdb8b7e0e2dba3179583b7e85437d72e4b3343164&o=&hp=1",
-        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/321354257.jpg?k=419027b1b400a15ba95115915abc593580efa352350ed789ce97725faf767f80&o=&hp=1",
-        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/612283721.jpg?k=fa209a270765f2018ea932251b905198d62b5e9d07cadfb466b8fdc0a0a8a354&o=&hp=1"
-      ];
-
-      let currentImageIndex = 0;
-      const sliderImage = document.querySelector('.slider-image');
-
-      function showImage(index) {
-        sliderImage.src = imagePaths[index];
-      }
-
-      function prevImage() {
-        currentImageIndex = (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
-        showImage(currentImageIndex);
-      }
-
-      function nextImage() {
-        currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
-        showImage(currentImageIndex);
-      }
-
-      showImage(currentImageIndex);
-
-      const TOTAL_ROOMS = 36;
-      const roomsLeftElem = document.querySelector('.rooms-left');
-      const purchasesElem = document.querySelector('.purchases');
-      const roomStates = [4, 3, 2];
-      const timeDelays = [4000, 5000];
-
-      function updateRoomCount(index) {
-         if (index >= roomStates.length) return;
-
-        const roomsLeft = roomStates[index];
-        const booked = TOTAL_ROOMS - roomsLeft;
-        const oldCount = parseInt(roomsLeftElem.textContent.match(/\d+/)[0]);
-        const alertElem = document.querySelector('.booking-alert');
-
-        if (roomsLeft !== oldCount) {
-            // 텍스트 갱신
-            roomsLeftElem.textContent = 'Rooms Left: ' + roomsLeft;
-            purchasesElem.textContent = 'Booked ' + booked + ' times since yesterday';
+      nextBtn.addEventListener("click"안 ' + booked + '회 예약되었습니다.';
 
             // 메시지 표시
             alertElem.style.display = 'inline-block';
